@@ -67,3 +67,23 @@
 
     <course-card [title]="angular core course">
     ````
+
+#### @Output decorator
+- The click event handler - its another way of adding standard browser event listener
+- This works as standard browser event, which means the click event will bubble to outside the component itself and it can be handled in Parent component
+- we can emit custom event from Child component
+    ````
+    @Output
+    eventName : new EventEmitter<Type>();
+    Option Type - refers to type of value getting emitted
+    
+    Emit the event
+    this.eventName.emit(value);
+    ````
+
+- The custom event emitted from Child component can be handled in Parent component with an handler and retrieve the emitted values using special variable `$event`
+    ````
+    <course-card (eventName)="onCourseSelected($event)"></course-card>
+    ````
+
+- The custom events after reaching Parent component doesn't bubble up the hierarchy.
