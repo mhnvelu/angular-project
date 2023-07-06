@@ -87,3 +87,21 @@
     ````
 
 - The custom events after reaching Parent component doesn't bubble up the hierarchy.
+
+#### ngFor core directive
+- A _structural directive_ that renders a template for each item in a collection.
+    ````
+    *ngFor = "let val of array"
+    ````
+- It provides exported values that can be aliased to local variables
+    ````
+    <course-card
+    *ngFor = "let val of array;index as i;first as isFirst"
+    [class.className]="isFirst">
+    Applies the css className to only the first element
+    ````
+
+- Angular uses object identity to track insertions and deletions within the iterator and reproduce those changes in the DOM.
+- The identities of elements in the iterator can change while the data does not. This can happen, for example, if the iterator is produced from an RPC to the server, and that RPC is re-run. Even if the data hasn't changed, the second response produces objects with different identities, and Angular must tear down the entire DOM and rebuild it (as if all old elements were deleted and all new elements inserted).
+
+- To avoid this expensive operation, you can customize the default tracking algorithm. by supplying the `trackBy` option to NgForOf. `trackBy` takes a function that has two arguments: index and item. If `trackBy` is given, Angular tracks changes by the return value of the function.
