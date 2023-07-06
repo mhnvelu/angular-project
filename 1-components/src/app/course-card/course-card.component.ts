@@ -10,7 +10,10 @@ import { Course } from '../model/course';
 export class CourseCardComponent {
 
   @Input()
-  value:Course;
+  value : Course;
+
+  @Input()
+  cardIndex : number;
 
   // custom event
   @Output()
