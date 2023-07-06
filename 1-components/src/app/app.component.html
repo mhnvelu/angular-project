@@ -6,7 +6,11 @@
 </div>
 
 
-<course-card (click)="onCourseCardClicked()" [value]="coreCourse"></course-card>
+<!-- <course-card (click)="onCourseCardClicked()" [value]="coreCourse"></course-card>
 <course-card (click)="onCourseCardClicked()" [value]="rxjsCourse"></course-card>
-<course-card (click)="onCourseCardClicked()" [value]="ngrxCourse"></course-card>
+<course-card (click)="onCourseCardClicked()" [value]="ngrxCourse"></course-card> -->
 
+<!-- courseSelected is a custom browser event emitted from Child component-->
+<course-card (courseSelected)="onCourseSelected($event)" [value]="coreCourse"></course-card>
+<course-card (courseSelected)="onCourseSelected($event)" [value]="rxjsCourse"></course-card>
+<course-card (courseSelected)="onCourseSelected($event)" [value]="ngrxCourse"></course-card>

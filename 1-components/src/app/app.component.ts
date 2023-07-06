@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {COURSES} from '../db-data';
+import { Course } from './model/course';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,11 @@ export class AppComponent {
   ngrxCourse = COURSES[2];
 
   onCourseCardClicked(){
-    console.log('-- App component - button click bubble handled')
+    console.log('--App component-- button click bubble handled')
+  }
+
+  onCourseSelected(course: Course){
+    console.log('--App component custom event--',course)
   }
 
 }
