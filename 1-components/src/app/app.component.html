@@ -6,7 +6,7 @@
 </div>
 
 
-<course-card [value]="coreCourse"></course-card>
-<course-card [value]="rxjsCourse"></course-card>
-<course-card [value]="ngrxCourse"></course-card>
+<course-card (click)="onCourseCardClicked()" [value]="coreCourse"></course-card>
+<course-card (click)="onCourseCardClicked()" [value]="rxjsCourse"></course-card>
+<course-card (click)="onCourseCardClicked()" [value]="ngrxCourse"></course-card>
 

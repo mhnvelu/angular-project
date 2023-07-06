@@ -12,5 +12,8 @@ export class AppComponent {
   rxjsCourse = COURSES[1];
   ngrxCourse = COURSES[2];
 
+  onCourseCardClicked(){
+    console.log('-- App component - button click bubble handled')
+  }
 
 }
