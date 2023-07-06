@@ -54,3 +54,16 @@
 ### Angular Components and Core Directives
 #### Build our own custom component
 - ng generate component course-card
+
+#### @Input decorator
+- With this decorator on a property in Component class, Angular knows that this is an input property of a component.
+    ````
+    @Input
+    title : string
+
+    The title property is referred in Component.html file using {{title}}
+
+    The Parent component which creates a Child component passes the value for this property
+
+    <course-card [title]="angular core course">
+    ````
