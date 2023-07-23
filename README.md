@@ -110,10 +110,24 @@
 -   Used for conditional display 
 -   Hide certain part of the page
 -   If *ngIf = false/undefined, the content is completely removed from DOM.
--   We can pass boolean value, object, function to *ngIf directive which evaluates to true/false/undefined
+-   We can pass boolean value, object, function to *ngIf directive which evaluates to true|false|undefined
 
 -   Syntax:
     ````
     *ngIf="value"
     *ngIf="value.iconUrl; else noImage"
+    ````
+
+#### ngClass:
+-   Used for conditional styling
+-   Apply certain styles based on some value
+-   It's not meant to replace css class property
+-   Syntax
+    ````
+    [ngClass] = "string|array|object|function"
+    [ngClass] = "'style1'"
+    [ngClass] = "'style1 style2'"
+    [ngClass] = "['style1','style2']"
+    [ngClass] = "{'style1':true,'style2':false}"
+    [ngClass] = "styleClasses()"
     ````
