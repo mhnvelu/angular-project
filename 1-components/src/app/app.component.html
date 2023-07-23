@@ -1,10 +1,13 @@
 <div class="top-menu">
-
-    <img class="logo"
-         src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
-
+  <img
+    class="logo"
+    src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
+  />
 </div>
 
+<div class="demo">
+  <div>Start Date : {{ startDate | date: 'MM/dd/yyyy'}}</div>
+</div>
 
 <!-- <course-card (click)="onCourseCardClicked()" [value]="coreCourse"></course-card>
 <course-card (click)="onCourseCardClicked()" [value]="rxjsCourse"></course-card>
@@ -15,11 +18,20 @@
 <course-card (courseSelected)="onCourseSelected($event)" [value]="rxjsCourse"></course-card>
 <course-card (courseSelected)="onCourseSelected($event)" [value]="ngrxCourse"></course-card> -->
 
-<course-card *ngFor="let course of courses;index as i;first as isFirst;last as isLast; even as isEven; odd as isOdd"
-(courseSelected)="onCourseSelected($event)" 
-[class.is-first] = "isFirst"
-[class.is-last] = "isLast"
-[class.is-even] = "isEven"
-[class.is-odd] = "isOdd"
-[value]="course" [cardIndex]="i + 1"></course-card>
-
+<course-card
+  *ngFor="
+    let course of courses;
+    index as i;
+    first as isFirst;
+    last as isLast;
+    even as isEven;
+    odd as isOdd
+  "
+  (courseSelected)="onCourseSelected($event)"
+  [class.is-first]="isFirst"
+  [class.is-last]="isLast"
+  [class.is-even]="isEven"
+  [class.is-odd]="isOdd"
+  [value]="course"
+  [cardIndex]="i + 1"
+></course-card>
