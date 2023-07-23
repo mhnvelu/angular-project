@@ -105,3 +105,15 @@
 - The identities of elements in the iterator can change while the data does not. This can happen, for example, if the iterator is produced from an RPC to the server, and that RPC is re-run. Even if the data hasn't changed, the second response produces objects with different identities, and Angular must tear down the entire DOM and rebuild it (as if all old elements were deleted and all new elements inserted).
 
 - To avoid this expensive operation, you can customize the default tracking algorithm. by supplying the `trackBy` option to NgForOf. `trackBy` takes a function that has two arguments: index and item. If `trackBy` is given, Angular tracks changes by the return value of the function.
+
+#### ngIf
+-   Used for conditional display 
+-   Hide certain part of the page
+-   If *ngIf = false/undefined, the content is completely removed from DOM.
+-   We can pass boolean value, object, function to *ngIf directive which evaluates to true/false/undefined
+
+-   Syntax:
+    ````
+    *ngIf="value"
+    *ngIf="value.iconUrl; else noImage"
+    ````
