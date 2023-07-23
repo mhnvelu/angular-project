@@ -2,7 +2,7 @@
 
     <div class="course-card" [ngClass]="cardClasses()">
 
-        <div class="course-title">
+        <div class="course-title" [ngStyle]="cardStyles()">
             {{cardIndex + ' ' + value.description}}
         </div>
         <img width="300" alt="Angular Logo" *ngIf="value.iconUrl; else noImage"

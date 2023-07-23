@@ -24,6 +24,7 @@ export class CourseCardComponent {
     this.courseSelected.emit(this.value);
   }
 
+  // ngClass
   cardClasses(){
 
     // return style as string
@@ -40,5 +41,10 @@ export class CourseCardComponent {
     // return {
     //   'beginner' : this.value.category === 'BEGINNER'
     // }
+  }
+
+  // ngStyle
+  cardStyles(){
+    return {'text-decoration':'underline'};
   }
 }
