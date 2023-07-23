@@ -131,3 +131,42 @@
     [ngClass] = "{'style1':true,'style2':false}"
     [ngClass] = "styleClasses()"
     ````
+
+#### ngStyle
+-   Used to apply styles directly to the elements
+-   We would apply styles as below using css styles
+    ````
+    [style.text-decoration]="'underline'"
+    ````
+-   If we need to apply multiple styles, then we need to repeat it with different styles.
+-   The more convenient way to apply multiple styles to an element is to use ngStyle directive
+-   Syntax:
+    ````
+    [ngStyle]="object|function"
+    [ngStyle]="{'text-decoration':'underline'}"
+    [ngStyle]="addStyles()"
+    ````
+-   Most of the times we would use plain css classes. We should not use ngClass or ngStyle.
+-   ngClass can be used more frequently than ngStyle.
+-   ngClass is for conditionally adding or removing classes depending on data.
+-   ngStyle is to apply certain css properties depending on data.
+
+#### ngSwitch
+-   If we want to make decisions with more than 2 options, the ngSwitch can be used.
+-   Syntax:
+    ````
+    [ngSwitch]="value"
+    *ngSwitchCase="'value-1'"
+    *ngSwitchCase="'value-2'"
+    *ngSwitchDefault
+    ````
+#### ngContainer
+-   The structural directives like ngIf, ngSwitch are applied on parent elements.
+-   This is not always a case where a component might not have top level element and we can't apply ngIf or ngSwitch
+-   So, we might end up in creating extra container element just to apply ngIf or ngSwitch
+-   This is a wrapping container element on to which we can apply structural directive.
+-   This will not create extra DOM element
+
+#### Built-in pipes
+-   The built in functions available for transformation.
+-   For example : number, currency, percent, date, uppercase, lowercase, titlecase, slice, json, keyvalue
