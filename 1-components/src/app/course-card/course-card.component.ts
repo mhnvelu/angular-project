@@ -23,4 +23,22 @@ export class CourseCardComponent {
     console.log('--course card button clicked--')
     this.courseSelected.emit(this.value);
   }
+
+  cardClasses(){
+
+    // return style as string
+    if(this.value.category === 'BEGINNER'){
+      return 'beginner';
+    }
+
+    // return array of styles
+    // if(this.value.category === 'BEGINNER'){
+    //   return ['beginner']
+    // }
+
+    // return styles as object
+    // return {
+    //   'beginner' : this.value.category === 'BEGINNER'
+    // }
+  }
 }

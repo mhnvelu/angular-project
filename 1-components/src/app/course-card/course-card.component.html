@@ -1,6 +1,6 @@
 <div class="courses" *ngIf="value">
 
-    <div class="course-card">
+    <div class="course-card" [ngClass]="cardClasses()">
 
         <div class="course-title">
             {{cardIndex + ' ' + value.description}}
