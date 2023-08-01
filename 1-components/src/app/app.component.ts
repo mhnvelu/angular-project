@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { COURSES } from "../db-data";
 import { Course } from "./model/course";
 import { CourseCardComponent } from "./course-card/course-card.component";
@@ -14,12 +14,17 @@ export class AppComponent {
   // Angular pipe example
   startDate = new Date();
 
+  @ViewChild("containerRef")
+  containerDiv: ElementRef;
 
-  @ViewChild('cardRef1')
+  @ViewChild("cardRef1")
   card1: CourseCardComponent;
 
-  @ViewChild('cardRef2')
+  @ViewChild("cardRef2")
   card2: CourseCardComponent;
+
+  @ViewChild("cardRef2",{read:ElementRef})
+  card22: ElementRef;
 
   onCourseCardClicked() {
     console.log("--App component-- button click bubble handled");
@@ -29,5 +34,7 @@ export class AppComponent {
     console.log("--App component custom event--", course);
     console.log("--App component custom event--", this.card1);
     console.log("--App component custom event--", this.card2);
+    console.log("--App component custom event--", this.card22);
+    console.log("--App component custom event--", this.containerDiv);
   }
 }

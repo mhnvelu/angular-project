@@ -6,7 +6,7 @@
 </div>
 
 <div class="demo">
-  <div>Start Date : {{ startDate | date: 'MM/dd/yyyy'}}</div>
+  <div>Start Date : {{ startDate | date : "MM/dd/yyyy" }}</div>
 </div>
 
 <!-- <course-card (click)="onCourseCardClicked()" [value]="coreCourse"></course-card>
@@ -36,11 +36,18 @@
   [cardIndex]="i + 1"
 ></course-card> -->
 
+<div class="courses" #containerRef>
+  <course-card
+    #cardRef1
+    (courseSelected)="onCourseSelected($event)"
+    [value]="courses[1]"
+  >
+  </course-card>
 
-<course-card #cardRef1 (courseSelected)="onCourseSelected($event)" [value]="courses[1]">
-
-</course-card>
-
-<course-card #cardRef2 (courseSelected)="onCourseSelected($event)" [value]="courses[2]">
-
-</course-card>
+  <course-card
+    #cardRef2
+    (courseSelected)="onCourseSelected($event)"
+    [value]="courses[2]"
+  >
+  </course-card>
+</div>
