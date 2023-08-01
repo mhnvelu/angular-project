@@ -15,8 +15,11 @@ export class AppComponent {
   startDate = new Date();
 
 
-  @ViewChild(CourseCardComponent)
-  card: CourseCardComponent;
+  @ViewChild('cardRef1')
+  card1: CourseCardComponent;
+
+  @ViewChild('cardRef2')
+  card2: CourseCardComponent;
 
   onCourseCardClicked() {
     console.log("--App component-- button click bubble handled");
@@ -24,6 +27,7 @@ export class AppComponent {
 
   onCourseSelected(course: Course) {
     console.log("--App component custom event--", course);
-    console.log("--App component custom event--", this.card);
+    console.log("--App component custom event--", this.card1);
+    console.log("--App component custom event--", this.card2);
   }
 }

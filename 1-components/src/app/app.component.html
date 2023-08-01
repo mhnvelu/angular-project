@@ -37,10 +37,10 @@
 ></course-card> -->
 
 
-<course-card (courseSelected)="onCourseSelected($event)" [value]="courses[1]">
+<course-card #cardRef1 (courseSelected)="onCourseSelected($event)" [value]="courses[1]">
 
 </course-card>
 
-<course-card (courseSelected)="onCourseSelected($event)" [value]="courses[2]">
+<course-card #cardRef2 (courseSelected)="onCourseSelected($event)" [value]="courses[2]">
 
 </course-card>
