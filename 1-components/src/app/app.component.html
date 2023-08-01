@@ -18,7 +18,7 @@
 <course-card (courseSelected)="onCourseSelected($event)" [value]="rxjsCourse"></course-card>
 <course-card (courseSelected)="onCourseSelected($event)" [value]="ngrxCourse"></course-card> -->
 
-<!-- <course-card
+<course-card
   *ngFor="
     let course of courses;
     index as i;
@@ -34,9 +34,9 @@
   [class.is-odd]="isOdd"
   [value]="course"
   [cardIndex]="i + 1"
-></course-card> -->
+></course-card>
 
-<div class="courses" #containerRef>
+<!-- <div class="courses" #containerRef>
   <course-card
     #cardRef1
     (courseSelected)="onCourseSelected($event)"
@@ -50,4 +50,4 @@
     [value]="courses[2]"
   >
   </course-card>
-</div>
+</div> -->
