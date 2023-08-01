@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { COURSES } from "../db-data";
 import { Course } from "./model/course";
+import { CourseCardComponent } from "./course-card/course-card.component";
 
 @Component({
   selector: "app-root",
@@ -13,11 +14,16 @@ export class AppComponent {
   // Angular pipe example
   startDate = new Date();
 
+
+  @ViewChild(CourseCardComponent)
+  card: CourseCardComponent;
+
   onCourseCardClicked() {
     console.log("--App component-- button click bubble handled");
   }
 
   onCourseSelected(course: Course) {
     console.log("--App component custom event--", course);
+    console.log("--App component custom event--", this.card);
   }
 }
