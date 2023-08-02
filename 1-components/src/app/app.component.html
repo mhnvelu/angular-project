@@ -18,7 +18,8 @@
 <course-card (courseSelected)="onCourseSelected($event)" [value]="rxjsCourse"></course-card>
 <course-card (courseSelected)="onCourseSelected($event)" [value]="ngrxCourse"></course-card> -->
 
-<course-card
+<!-- ngFor directive -->
+<!-- <course-card
   *ngFor="
     let course of courses;
     index as i;
@@ -34,8 +35,23 @@
   [class.is-odd]="isOdd"
   [value]="course"
   [cardIndex]="i + 1"
-></course-card>
+></course-card> -->
 
+<!-- content projection -->
+<div class="courses" *ngIf="courses[1] as course">
+  <course-card [value]="course" (courseSelected)="onCourseSelected($event)">
+    <h5>5 Lessons</h5>
+    <div class="course-image">
+      <img width="300" alt="Angular Logo" [src]="course.iconUrl" />
+    </div>
+
+    <div class="course-description">
+      {{ course.longDescription }}
+    </div>
+  </course-card>
+</div>
+
+<!-- View child decorator -->
 <!-- <div class="courses" #containerRef>
   <course-card
     #cardRef1
