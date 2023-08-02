@@ -170,3 +170,58 @@
 #### Built-in pipes
 -   The built in functions available for transformation.
 -   For example : number, currency, percent, date, uppercase, lowercase, titlecase, slice, json, keyvalue
+
+## Section 3 - Angular Local Template Query
+### ViewChild Decorator
+-   Component needs programmatic reference to some elements in template
+-   Template query for obtaining reference to element in template and access it at level of component class
+
+#### @ViewChild decorator
+-   From Component class, get reference to a element in template
+-   If there are multiple matching elements, it get references to first matching element.
+-   Query can be based on:
+    -   Component name
+        ````
+        @ViewChild(CourseCardComponent)
+        card1: CourseCardComponent;
+        ````
+        We get reference to the Component itself and not the HTML element which represents the Component
+
+    -   Template reference
+        ``````
+        @ViewChild('cardRef1')
+        card1: CourseCardComponent;
+        ``````
+        Useful when multiple elements of same class is present and query using their Template reference
+
+    -   To get reference to HTML which represents the component, we can query like
+        ````
+        @ViewChild("cardRef2",{read:ElementRef})
+        card2: ElementRef;
+        ````
+    -   We can also query plain HTML element as well. we get reference to plain HTML directly
+        ````
+        @ViewChild('containerRef')
+        containerDiv: ElementRef;
+        ````
+
+-   We can't query deeper into Component Hierarchy Tree. The scope of @ViewChild decorator is restricted to the template of the Component itself.
+
+#### AfterViewInit Lifecycle Hook
+-   When are @ViewChild decorators populated?
+    -   The value is undefined when the component is being created. The construtor would have undefined value
+    -   The value would have been populated when it reaches ngAfterViewInit() life cycle hook.
+We should not do any data modification synchronously in this hook when the component is getting initized and it will throw an error.
+    -   We will not face this issue when its modified asynchronously
+
+#### View Children Decorator
+To query multiple related components
+````
+@ViewChildren("CourseCardComponent")
+cards:QueryList<CourseCardComponent>
+
+
+@ViewChildren("CourseCardComponent",{read:ElementRef})
+cards:QueryList<ElementRef>
+````
+
