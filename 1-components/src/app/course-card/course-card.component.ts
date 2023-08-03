@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { AfterViewInit, Component, ContentChild, EventEmitter, Input, Output } from "@angular/core";
 import { Course } from "../model/course";
 
 @Component({
@@ -6,7 +6,8 @@ import { Course } from "../model/course";
   templateUrl: "./course-card.component.html",
   styleUrls: ["./course-card.component.css"],
 })
-export class CourseCardComponent {
+export class CourseCardComponent implements AfterViewInit{
+ 
   @Input()
   value: Course;
 
@@ -17,6 +18,12 @@ export class CourseCardComponent {
   @Output()
   courseSelected = new EventEmitter<Course>();
 
+  @ContentChild("courseImage")
+  image;
+
+  ngAfterViewInit(): void {
+    console.log('--projected content--',this.image);
+  }
   onCourseViewed() {
     console.log("--course card button clicked--");
     this.courseSelected.emit(this.value);
