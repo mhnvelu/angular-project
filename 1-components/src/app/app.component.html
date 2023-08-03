@@ -41,10 +41,7 @@
 <div class="courses" *ngIf="courses[1] as course">
   <course-card [value]="course" (courseSelected)="onCourseSelected($event)">
     <h5>5 Lessons</h5>
-    <div class="course-image" #courseImage>
-      <img width="300" alt="Angular Logo" [src]="course.iconUrl" />
-    </div>
-
+    <course-image [imageUrl]="course.iconUrl"></course-image>
     <div class="course-description">
       {{ course.longDescription }}
     </div>
