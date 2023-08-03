@@ -42,6 +42,8 @@
   <course-card [value]="course" (courseSelected)="onCourseSelected($event)">
     <h5>5 Lessons</h5>
     <course-image [imageUrl]="course.iconUrl"></course-image>
+    <course-image [imageUrl]="courses[2].iconUrl"></course-image>
+    <course-image [imageUrl]="courses[3].iconUrl"></course-image>
     <div class="course-description">
       {{ course.longDescription }}
     </div>

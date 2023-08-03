@@ -1,11 +1,14 @@
 import {
+  AfterContentInit,
   AfterViewInit,
   Component,
   ContentChild,
+  ContentChildren,
   ElementRef,
   EventEmitter,
   Input,
   Output,
+  QueryList,
 } from "@angular/core";
 import { Course } from "../model/course";
 import { CourseImageComponent } from "../course-image/course-image.component";
@@ -15,7 +18,8 @@ import { CourseImageComponent } from "../course-image/course-image.component";
   templateUrl: "./course-card.component.html",
   styleUrls: ["./course-card.component.css"],
 })
-export class CourseCardComponent implements AfterViewInit {
+export class CourseCardComponent implements AfterViewInit, AfterContentInit {
+  
   @Input()
   value: Course;
 
@@ -35,11 +39,19 @@ export class CourseCardComponent implements AfterViewInit {
   // image: CourseImageComponent;
 
   //  using Component name to retrieve native DOM element
-  @ContentChild(CourseImageComponent, { read: ElementRef })
-  image: CourseImageComponent;
+  // @ContentChild(CourseImageComponent, { read: ElementRef })
+  // image: CourseImageComponent;
+
+  //  using Component name to retrieve native DOM element of multiple Components of same type
+  @ContentChildren(CourseImageComponent, { read: ElementRef })
+  images : QueryList<CourseImageComponent>;
 
   ngAfterViewInit(): void {
-    console.log("--projected content--", this.image);
+    console.log("--projected content ngAfterViewInit--", this.images);
+  }
+
+  ngAfterContentInit(): void {
+    console.log("--projected content ngAfterContentInit--", this.images);
   }
   onCourseViewed() {
     console.log("--course card button clicked--");
