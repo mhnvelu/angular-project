@@ -9,6 +9,7 @@ import {
 import { COURSES } from "../db-data";
 import { Course } from "./model/course";
 import { CourseCardComponent } from "./course-card/course-card.component";
+import { HighlightedDirective } from "./directives/highlighted.directive";
 
 @Component({
   selector: "app-root",
@@ -21,9 +22,17 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren(CourseCardComponent, { read: ElementRef })
   cards: QueryList<ElementRef>;
 
+  // @ViewChild(HighlightedDirective)
+  // highlighter: HighlightedDirective;
+
+  @ViewChild(CourseCardComponent, { read: HighlightedDirective })
+  highlighter: HighlightedDirective;
+
   constructor() {}
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    console.log("--ngAfterViewInit--", this.highlighter);
+  }
 
   onCourseSelected(course: Course) {}
 

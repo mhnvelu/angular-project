@@ -1,27 +1,23 @@
 <div class="top-menu">
-
-    <img class="logo"
-         src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
-
+  <img
+    class="logo"
+    src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
+  />
 </div>
-
-
 
 <div class="courses" *ngIf="courses[0] as course">
+  <course-card
+    (courseSelected)="onCourseSelected($event)"
+    [course]="course"
+    highlighted
+    [highlighter]="true"
+    (toggleHighlight)="onToggleHighlight($event)"
+    #highlightDir="hl"
+  >
+    <course-image [src]="course.iconUrl"></course-image>
 
-    <course-card
-            (courseSelected)="onCourseSelected($event)"
-                 [course]="course" highlighted [highlighter]="true" (toggleHighlight)="onToggleHighlight($event)">
-
-        <course-image [src]="course.iconUrl"></course-image>
-
-        <div class="course-description">
-            {{ course.longDescription }}
-        </div>
-
-    </course-card>
-
-
+    <div class="course-description" (dblclick)="highlightDir.toggle()">
+      {{ course.longDescription }}
+    </div>
+  </course-card>
 </div>
-
-
