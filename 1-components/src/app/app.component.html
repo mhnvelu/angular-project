@@ -45,9 +45,9 @@
     <img src="/assets/empty-image.png" />
   </ng-template>
 
-  <div
+  <ng-container
     *ngTemplateOutlet="blankImage; context: { description: course.description }"
-  ></div>
+  ></ng-container>
 
   <course-card [value]="course" (courseSelected)="onCourseSelected($event)">
     <h5>5 Lessons</h5>
