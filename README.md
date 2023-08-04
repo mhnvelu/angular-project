@@ -171,7 +171,7 @@
 -   The built in functions available for transformation.
 -   For example : number, currency, percent, date, uppercase, lowercase, titlecase, slice, json, keyvalue
 
-## Section 3 - Angular Local Template Query
+## Section 3 : Angular Local Template Query
 ### ViewChild Decorator
 -   Component needs programmatic reference to some elements in template
 -   Template query for obtaining reference to element in template and access it at level of component class
@@ -271,3 +271,65 @@ cards:QueryList<ElementRef>
     images : QueryList<CourseImageComponent>;
     ````
 
+## Section 5 : Angular Template
+### ng-template
+-   Used to create template segment
+-   By default, the template segment is not displayed on page
+-   The template segment is used only if it is explicitly referred in template
+-   The template segment can refer variables from the template in which its embedded
+    ````
+    <ng-template #blankImage>
+      <p class="warn">{{value.description}} No image is available yet</p>
+      <img src="/assets/empty-image.png">
+    </ng-template>
+    ````
+### ng-template instantiation with ngTemplateOutlet
+-   Provide private variable context that is visible only within the ng-template
+-   We can pass different variables for each ng-template and make the template itself reusable
+-   We can define the ng-template in one component and pass it as input to another component by filling in the __context__ of the ng-template as we need
+-   __ngTemplateOutlet__ : This structural directive is used to instantiate the ng-template
+    ````
+    <!-- ng template -->
+    <ng-template #blankImage let-courseName="description">
+    <p class="warn">{{ courseName }} No image is available yet</p>
+    <img src="/assets/empty-image.png" />
+    </ng-template>
+
+    // Instantiate the ng-template
+    <div
+    *ngTemplateOutlet="blankImage; context: { description: course.description }"
+    ></div>
+    ````
+
+-   We can use ng-container with ngTemplateOutlet instead of div. This avoids creating a DOM element just for instantiating the ng-template
+    ````
+    <ng-container
+    *ngTemplateOutlet="blankImage; context: { description: course.description }"
+    ></ng-container>
+    ````
+
+### ng-template as Component Input:
+-   A configurable ng-template can be passed as Component Input and the Component can instantiate the ng-template using ngTemplateOutlet
+
+    ````
+    //ng-template as input
+    <course-card [value]="course" [noImageTemplate]="blankImage">
+    <course-image [imageUrl]="course.iconUrl"></course-image>
+    </course-card>
+
+    //Input field for ng-template from above
+    @Input()
+    noImageTemplate : TemplateRef<any>
+
+    // Instantiate ng-template
+    <ng-template #noImage>
+      <ng-container *ngTemplateOutlet="noImageTemplate; context:{description : value.description}"> </ng-container>
+    </ng-template>
+
+    // Reference to ng-template above
+    <ng-content
+      select="course-image"
+      *ngIf="value.iconUrl; else noImage"
+    ></ng-content>
+
+    ````
