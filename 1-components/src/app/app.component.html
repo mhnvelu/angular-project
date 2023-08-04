@@ -39,11 +39,19 @@
 
 <!-- content projection -->
 <div class="courses" *ngIf="courses[1] as course">
+  <!-- ng template -->
+  <ng-template #blankImage let-courseName="description">
+    <p class="warn">{{ courseName }} No image is available yet</p>
+    <img src="/assets/empty-image.png" />
+  </ng-template>
+
+  <div
+    *ngTemplateOutlet="blankImage; context: { description: course.description }"
+  ></div>
+
   <course-card [value]="course" (courseSelected)="onCourseSelected($event)">
     <h5>5 Lessons</h5>
     <course-image [imageUrl]="course.iconUrl"></course-image>
-    <course-image [imageUrl]="courses[2].iconUrl"></course-image>
-    <course-image [imageUrl]="courses[3].iconUrl"></course-image>
     <div class="course-description">
       {{ course.longDescription }}
     </div>
