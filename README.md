@@ -225,3 +225,49 @@ cards:QueryList<CourseCardComponent>
 cards:QueryList<ElementRef>
 ````
 
+## Section 4 : Angular Content Projection
+-   Making configurable components
+-   To make a static template more configurable
+### ng-content:
+-   Pass the configurable element in the content part of Component
+-   Use **ng-content** directive in Component's Template to render the projected configurable element passed to the Component
+-   In **ng-content** directive, we can select only specific element from the configurable element passed to the Component using **select**.
+-   **select** - It accepts HTML element or Component name or css class name
+-   Anything that is not matched to the select, can still be projected by simply creating a ng-content in the template
+    ````
+    <ng-content select="course-image"></ng-content>
+    <ng-content select=".course-description"></ng-content>
+    <ng-content></ng-content>
+    ````
+-   If many elements match the select criteria, all the matched elements will be projected
+
+### Content Child Decorator:
+-   A component can get programmatic reference to projected content in its own template
+-   We can't use @ViewChild to query the projected content even if we use Template reference. The value will be undefined.
+-   @ViewChild decorator can query elements which are visible only inside the template. It can't see inside the projected content.
+-   Inorder to see inside the projected content, we need to use new decorator **@ContentChild**. It covers only the projected content. It can't be used to query other elements of the template. Its scope is restricted to query inside ng-content only. In other terms, its restricted to content part of the component.
+-   It can also be used to query other Components inside the projected content part of the Component
+
+    ````
+    // using template reference
+    @ContentChild("courseImage")
+    image : ElementRef;
+
+    //using Component name to retrieve the Component
+    @ContentChild(CourseImageComponent)
+    image: CourseImageComponent;
+
+    //using Component name to retrieve native DOM element
+    @ContentChild(CourseImageComponent, { read: ElementRef })
+    image: CourseImageComponent;
+    ````
+
+### Content Children and AfterContent Lifecycle Hook:
+- Allows to query collecton of elements that match the query
+    ````
+    //using Component name to retrieve native DOM element of multiple Components of same type
+    
+    @ContentChildren(CourseImageComponent, { read: ElementRef })
+    images : QueryList<CourseImageComponent>;
+    ````
+
