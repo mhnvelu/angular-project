@@ -3,6 +3,14 @@
     <div class="course-title" [ngStyle]="cardStyles()">
       {{ cardIndex || "" + " " + value.description }}
     </div>
+
+    <ng-content
+      select="course-image"
+      *ngIf="value.iconUrl; else noImage"
+    ></ng-content>
+    <ng-template #noImage>
+      <ng-container *ngTemplateOutlet="noImageTemplate; context:{description : value.description}"> </ng-container>
+    </ng-template>
     <ng-content select=".course-description"></ng-content>
     <ng-content></ng-content>
 
