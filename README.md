@@ -466,7 +466,8 @@ cards:QueryList<ElementRef>
 -   The prefix ngx is commonly used inorder to identify a directive that is not part of Angular core.
 
 ### Custom Angular Structural Directives:
-    ````
+
+    
     @Directive({
     selector: "[ngxUnless]",
     })
@@ -490,8 +491,8 @@ cards:QueryList<ElementRef>
         }
     }
     }
-    ````
-    ````
+    
+    
     <course-image [src]="course.iconUrl" *ngxUnless="!course.iconUrl"
     ></course-image>    
-    ````    
+        
