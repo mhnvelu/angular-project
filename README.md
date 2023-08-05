@@ -333,3 +333,165 @@ cards:QueryList<ElementRef>
     ></ng-content>
 
     ````
+## ## Section 6 : Angular Directives
+### Angular Attribute Directives
+-   The attributes on DOM HTML element decides the behaviour and appearance.
+-   Similarly, the Angular Attribute Directives on Angular Component decides the behaviour and appearance.
+-   These Directives can be applied to native DOM element as well.
+    ````
+        ng g directive highlighted
+    
+        @Directive({
+        selector: '[highlighted]'
+        })
+    ````
+-   If the directive is applied to a Component, then it is instantiated.
+    ````    
+    <course-card (courseSelected)="onCourseSelected($event)"
+    [course]="course" highlighted>
+    ````
+-   The directive can accept expression as well.
+
+### Angular Host Binding - DOM Properties Vs Attributes
+-   The instance of Component to which the instance of directive is applied is known as Host element of the directive.
+-   The directive is always applied to Host element
+-   There are several ways the directive can interact with Host element
+####   HostBinding decorator : 
+-   It allows us to modify any DOM properties of the element to which the directive is applied.
+-   It can be applied only to known DOM properties of the Host element.
+-   It can be applied to DOM attributes of the Host element. We can set DOM attributes different from DOM properties
+-   DOM attribute is different from DOM properties
+
+    ````
+    @Input("highlighter")
+    isHighlighted = false;
+
+    constructor() {
+    console.log("--Directive highlighted created--");
+    }
+
+    @HostBinding("className")
+    get cssClasses() {
+       return "highlight"; // This is css class from Component.css file
+    }
+
+    //  highlight applied as css class
+    @HostBinding("class.highlight")
+    get cssClasses() {
+        return true;;
+    }
+
+    // highlight will not be applied
+    @HostBinding("class.highlight")
+    get cssClasses() {
+        return false;;
+    }
+    ````
+    ````
+    -   Applying highlighted directive and setting its input highlighter=true|false and making the directive has configurable.
+    -   [highlighter]="true" is not an input to the course-card component.
+    It's an Input to the directive
+
+    <course-card (courseSelected)="onCourseSelected($event)"
+    [course]="course" highlighted [highlighter]="true">
+    
+    // highlight will not be applied by default
+    @HostBinding("class.highlight")
+    get cssClasses() {
+        return this.isHighlighted;
+    }
+    ````
+    ````
+    // Applied on DOM style property
+    @HostBinding("style.border")
+    get cssClasses() {
+        return "5px solid green";
+    }
+    ````
+    ````
+    // DOM attribute disabled=true is added
+    @HostBinding("attr.disabled")
+    get disabled() {
+         return "true";
+    }
+    ````
+
+### Angular Host Listener - Handling events in Directives
+-   The Directive can interact with Host Element via DOM events
+    ````
+    @HostListener('mouseover')
+    mouseOver(){
+        this.isHighlighted = true;
+    }
+    ````
+-   Host Listener is a convenient way to interact with native DOM events on the Host element.
+- We can use the Directive to emit custom events as well
+
+### Angular Directive Export as Syntax
+-   To get programmatic access to Directive either in Template or Componenet class
+    ````
+    @Directive({
+    selector: "[highlighted]",
+    exportAs: "hl",
+    })
+    export class HighlightedDirective
+    ````
+    ````
+    <course-card
+    (courseSelected)="onCourseSelected($event)"
+    [course]="course"
+    highlighted
+    [highlighter]="true"
+    (toggleHighlight)="onToggleHighlight($event)"
+    #highlightDir="hl"
+    >
+    
+    <div class="course-description" (dblclick)="highlightDir.toggle()">
+      {{ course.longDescription }}
+    </div>
+    </course-card>
+    ````    
+    ````
+    @ViewChild(HighlightedDirective)
+    highlighter: HighlightedDirective;
+
+    @ViewChild(CourseCardComponent, { read: HighlightedDirective })
+    highlighter: HighlightedDirective;
+    ````
+### Angular Structural Directives - Understanding the Star Syntax
+-   We can create custom Structural Directives
+    ````
+    ng g directive ngx-unless
+    ````
+-   The prefix ngx is commonly used inorder to identify a directive that is not part of Angular core.
+
+### Custom Angular Structural Directives:
+    ````
+    @Directive({
+    selector: "[ngxUnless]",
+    })
+    export class NgxUnlessDirective {
+    visible = false;
+
+    constructor(
+    private templateRef: TemplateRef<any>,
+    private viewContainer: ViewContainerRef
+    ) {}
+
+    // Angular framework calls this method. We need to make sure we don't create or clear the container when framework calls it many times.
+    @Input()
+    set ngxUnless(condition: boolean) {
+        if (!condition && !this.visible) {
+            this.viewContainer.createEmbeddedView(this.templateRef);
+            this.visible = true;
+        } else if (condition && this.visible) {
+            this.viewContainer.clear();
+            this.visible = false;
+        }
+    }
+    }
+    ````
+    ````
+    <course-image [src]="course.iconUrl" *ngxUnless="!course.iconUrl"
+    ></course-image>    
+    ````    
